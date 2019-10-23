@@ -10,9 +10,18 @@ const schema = buildSchema(`
     # Boolean
     # ID
 
+    type Cat {
+        _id: ID
+        name: String
+        age: Int
+        color: String
+        race: String
+        owner: Person
+    }
+
     type Person {
         name: String
-        cats: [String]
+        cats: [Cat]
         age: Int
         balance: Float
         developer: Boolean
@@ -20,48 +29,84 @@ const schema = buildSchema(`
     }
 
     type Query {
-        person: Person
         people: [Person]
+        cats: [Cat]
     }
 `)
 
-// value
-const value = {
-    person: {
+const people = [
+    {
         _id: "1",
         name: "Marco",
         age: 40,
-        cats: ["Chewbacca", "Macciato"],
+        cats: ["1", "2"],
         balance: 10.1,
         developer: true
     },
-    people: [
-        {
-            _id: "1",
-            name: "Marco",
-            age: 40,
-            cats: ["Chewbacca", "Macciato"],
-            balance: 10.1,
-            developer: true
-        },
-        {
-            _id: "2",
-            name: "Vinicio",
-            age: 4,
-            cats: ["Chewbacca"],
-            balance: 1100000,
-            developer: false
+    {
+        _id: "2",
+        name: "Uwu",
+        age: 40,
+        cats: ["3"],
+        balance: 10.1,
+        developer: true
+    }
+]
+
+const cats = [
+    {
+        _id: "1",
+        name: "Michi",
+        age: 10,
+        color: "Negro",
+        race: "Siames",
+        owner: "1"
+    },
+    {
+        _id: "2",
+        name: "GGG",
+        age: 10,
+        color: "Negro",
+        race: "Siames",
+        owner: "1"
+    },
+    {
+        _id: "3",
+        name: "Algo",
+        age: 10,
+        color: "Negro",
+        race: "Siames",
+        owner: "2"
+    }
+]
+
+// value
+const value = {
+    people: people.map(p => {
+        return {
+            ...p,
+            cats: p.cats.map(c => {
+                // c es "1"
+                return cats.find(cat => cat._id === c)
+            })
         }
-    ]
+    }),
+    cats
 }
 
 // query
 const query = `
     query {
-        person {
-            _id
+        people {
             name
-            cats
+            cats {
+                _id
+                name
+                race
+                owner {
+                    name
+                }
+            }
         }
     }
 `
