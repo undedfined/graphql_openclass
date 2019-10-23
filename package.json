@@ -1,0 +1,23 @@
+{
+    "name": "graphql_example",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mer1yn/graphql_openclass.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/mer1yn/graphql_openclass/issues"
+    },
+    "homepage": "https://github.com/mer1yn/graphql_openclass#readme",
+    "dependencies": {
+        "graphql": "^14.5.8"
+    }
+}
